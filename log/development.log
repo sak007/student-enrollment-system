@@ -47,3 +47,130 @@ Migrating to CreateEnrollments (20220206190416)
   [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-02-06 15:20:10 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /opt/homebrew/lib/ruby/gems/3.0.0/gems/railties-7.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /opt/homebrew/lib/ruby/gems/3.0.0/gems/railties-7.0.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | Allocations: 821)
+Completed 200 OK in 15ms (Views: 4.5ms | ActiveRecord: 0.0ms | Allocations: 7819)
+
+
+Started GET "/" for ::1 at 2022-02-06 15:20:19 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /opt/homebrew/lib/ruby/gems/3.0.0/gems/railties-7.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /opt/homebrew/lib/ruby/gems/3.0.0/gems/railties-7.0.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 392)
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.0ms | Allocations: 1434)
+
+
+Started GET "/" for ::1 at 2022-02-06 15:21:19 -0500
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 8.1ms | Allocations: 6129)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | Allocations: 6238)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms | Allocations: 12141)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `signup_path' for #<ActionView::Base:0x0000000000d728>):
+    1: <h1>Student Enrollment system</h1>
+    2: <p>Tag line...</p>
+    3: 
+    4: <%= link_to "Signup", signup_path %> or
+    5: <%= link_to "Login", login_path %>
+  
+app/views/home/index.html.erb:4
+Started GET "/" for ::1 at 2022-02-06 15:22:04 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 654)
+  Rendered layout layouts/application.html.erb (Duration: 149.4ms | Allocations: 99376)
+Completed 200 OK in 156ms (Views: 152.6ms | ActiveRecord: 0.0ms | Allocations: 105344)
+
+
+Started GET "/login" for ::1 at 2022-02-06 15:22:06 -0500
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 17.1ms | Allocations: 5794)
+  Rendered layout layouts/application.html.erb (Duration: 17.3ms | Allocations: 5895)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms | Allocations: 6918)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `sessions_path' for #<ActionView::Base:0x0000000000da98>
+Did you mean?  session):
+    1: <p id="alert"><%= alert %></p>
+    2: <h1>Login</h1>
+    3: <%= form_tag sessions_path do |form| %>
+    4:   <div class="field">
+    5:     <%= label_tag :email_address %>
+    6:     <%= text_field_tag :email_address %>
+  
+app/views/sessions/new.html.erb:3
+Started GET "/login" for ::1 at 2022-02-06 15:22:48 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 9.3ms | Allocations: 6214)
+  Rendered layout layouts/application.html.erb (Duration: 9.4ms | Allocations: 6323)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms | Allocations: 12226)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `session_path' for #<ActionView::Base:0x0000000000d728>
+Did you mean?  session):
+    1: <p id="alert"><%= alert %></p>
+    2: <h1>Login</h1>
+    3: <%= form_tag session_path do |form| %>
+    4:   <div class="field">
+    5:     <%= label_tag :email_address %>
+    6:     <%= text_field_tag :email_address %>
+  
+app/views/sessions/new.html.erb:3
+Started GET "/login" for ::1 at 2022-02-06 15:23:34 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1522)
+  Rendered layout layouts/application.html.erb (Duration: 27.0ms | Allocations: 36946)
+Completed 200 OK in 32ms (Views: 28.6ms | ActiveRecord: 0.0ms | Allocations: 42914)
+
+
+Started GET "/login" for ::1 at 2022-02-06 15:23:43 -0500
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 562)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | Allocations: 2761)
+Completed 200 OK in 12ms (Views: 9.8ms | ActiveRecord: 0.0ms | Allocations: 3151)
+
+
+Started GET "/" for ::1 at 2022-02-06 15:23:44 -0500
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 280)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 2802)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 0.0ms | Allocations: 3848)
+
+
+Started GET "/login" for ::1 at 2022-02-06 15:23:46 -0500
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 477)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | Allocations: 2574)
+Completed 200 OK in 10ms (Views: 6.5ms | ActiveRecord: 0.0ms | Allocations: 2925)
+
+
