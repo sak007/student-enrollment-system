@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  instructor_id: 1
+  weekday1: MyString
+  weekday2: MyString
+  starttime: MyString
+  endtime: MyString
+  code: MyString
+  capacity: 1
+  wlcapacity: 1
+  status: MyString
+  room: MyString
+
+two:
+  name: MyString
+  description: MyString
+  instructor_id: 1
+  weekday1: MyString
+  weekday2: MyString
+  starttime: MyString
+  endtime: MyString
+  code: MyString
+  capacity: 1
+  wlcapacity: 1
+  status: MyString
+  room: MyString
