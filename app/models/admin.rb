@@ -4,5 +4,5 @@ class Admin < ApplicationRecord
   message: "Please Enter a valid email ID" }
   validates :name, presence: true,
   validates :password_digest, presence: true,
-  validates :phone, presence: true
+  validates :phone, presence: true, length: { minimum: 10,maximum: 14 }
 end
