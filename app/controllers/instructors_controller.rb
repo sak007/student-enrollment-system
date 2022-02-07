@@ -27,6 +27,11 @@ class InstructorsController < ApplicationController
       if @instructor.save
         format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully created." }
         format.json { render :show, status: :created, location: @instructor }
+        @user = User.new
+        @user.email = @instructor.user_email
+        @user.password_digest = @instructor.password_digest
+        @user.role = 'INSTRUCTOR'
+        @user.save
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @instructor.errors, status: :unprocessable_entity }
