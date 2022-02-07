@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
       else
         flash.now[:alert] = "Invalid user role"
         render "new"
-        # redirect_to root_path
       end
     else
       flash.now[:alert] = "Email or password is invalid"
