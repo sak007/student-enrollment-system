@@ -174,151 +174,118 @@ Processing by SessionsController#new as HTML
 Completed 200 OK in 10ms (Views: 6.5ms | ActiveRecord: 0.0ms | Allocations: 2925)
 
 
-Started GET "/" for ::1 at 2022-02-06 15:32:31 -0500
-  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (Duration: 14.6ms | Allocations: 5768)
-  Rendered layout layouts/application.html.erb (Duration: 14.7ms | Allocations: 5877)
-Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms | Allocations: 11781)
 
-
-  
-ActionView::Template::Error (undefined local variable or method `instructor_signup_path' for #<ActionView::Base:0x0000000000d8e0>
-Did you mean?  instructor_signup_path_url
-               instructor_signup_path_path
-               instructors_path):
-    1: <h1>Student Enrollment system</h1>
-    2: <p>Tag line...</p>
-    3: 
-    4: <%= link_to "Instructor Signup", instructor_signup_path %> or
-    5: <%= link_to "Student Signup", student_signup_path %> or
-    6: <%= link_to "Login", login_path %>
-  
-app/views/home/index.html.erb:4
-Started GET "/" for ::1 at 2022-02-06 15:36:17 -0500
-  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to MigScript (20220206212832)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 707)
-  Rendered layout layouts/application.html.erb (Duration: 20.3ms | Allocations: 36391)
-Completed 200 OK in 26ms (Views: 22.1ms | ActiveRecord: 0.0ms | Allocations: 42360)
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins"[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "admins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "user_email" varchar, "phone" integer, "password_digest" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_user_email" ON "admins" ("user_email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses"[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "courses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" varchar, "instructor_id" integer, "weekday1" varchar, "weekday2" varchar, "starttime" varchar, "endtime" varchar, "code" varchar, "capacity" integer, "wlcapacity" integer, "status" varchar, "room" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "enrollments"[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "enrollments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "student_id" integer, "status" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "instructors"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "instructors" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "user_email" varchar, "password_digest" varchar, "department" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_instructors_on_user_email" ON "instructors" ("user_email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "students"[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "students" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "password_digest" varchar, "dob" date, "user_email" varchar, "phone" integer, "major" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_students_on_user_email" ON "students" ("user_email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "password_digest" varchar, "role" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20220206190416)[0m
+  [1m[35m (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20220206183734),
+(20220206183739),
+(20220206183809),
+(20220206183816),
+(20220206190408);
 
-
-Started GET "/instructors/new" for ::1 at 2022-02-06 15:36:19 -0500
-Processing by InstructorsController#new as HTML
-Completed 500 Internal Server Error in 26ms (ActiveRecord: 0.0ms | Allocations: 2868)
-
-
-  
-LoadError (cannot load such file -- bcrypt):
-  
-app/models/instructor.rb:2:in `<class:Instructor>'
-app/models/instructor.rb:1:in `<main>'
-app/controllers/instructors_controller.rb:15:in `new'
-Started GET "/" for ::1 at 2022-02-06 15:36:25 -0500
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 105)
-  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 2578)
-Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms | Allocations: 2948)
-
-
-Started GET "/" for ::1 at 2022-02-06 15:37:01 -0500
-  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 707)
-  Rendered layout layouts/application.html.erb (Duration: 18.1ms | Allocations: 36419)
-Completed 200 OK in 24ms (Views: 20.0ms | ActiveRecord: 0.0ms | Allocations: 42388)
-
-
-Started GET "/instructors/new" for ::1 at 2022-02-06 15:37:03 -0500
-Processing by InstructorsController#new as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering instructors/new.html.erb within layouts/application
-  Rendered instructors/_form.html.erb (Duration: 15.8ms | Allocations: 6075)
-  Rendered instructors/new.html.erb within layouts/application (Duration: 16.8ms | Allocations: 6480)
-  Rendered layout layouts/application.html.erb (Duration: 19.2ms | Allocations: 8767)
-Completed 200 OK in 33ms (Views: 20.9ms | ActiveRecord: 0.6ms | Allocations: 16229)
-
-
-Started GET "/students/new" for ::1 at 2022-02-06 15:37:12 -0500
-Processing by StudentsController#new as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering students/new.html.erb within layouts/application
-  Rendered students/_form.html.erb (Duration: 7.4ms | Allocations: 3523)
-  Rendered students/new.html.erb within layouts/application (Duration: 8.5ms | Allocations: 3910)
-  Rendered layout layouts/application.html.erb (Duration: 19.2ms | Allocations: 6204)
-Completed 200 OK in 30ms (Views: 20.9ms | ActiveRecord: 0.9ms | Allocations: 11848)
-
-
-Started GET "/instructors/new" for ::1 at 2022-02-06 15:37:15 -0500
-Processing by InstructorsController#new as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering instructors/new.html.erb within layouts/application
-  Rendered instructors/_form.html.erb (Duration: 4.0ms | Allocations: 1418)
-  Rendered instructors/new.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1517)
-  Rendered layout layouts/application.html.erb (Duration: 7.7ms | Allocations: 3621)
-Completed 200 OK in 9ms (Views: 8.4ms | ActiveRecord: 0.0ms | Allocations: 4022)
-
-
-Started GET "/instructors/new" for ::1 at 2022-02-06 15:37:43 -0500
-Processing by InstructorsController#new as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering instructors/new.html.erb within layouts/application
-  Rendered instructors/_form.html.erb (Duration: 7.3ms | Allocations: 1410)
-  Rendered instructors/new.html.erb within layouts/application (Duration: 7.7ms | Allocations: 1505)
-  Rendered layout layouts/application.html.erb (Duration: 11.9ms | Allocations: 3601)
-Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.0ms | Allocations: 3946)
-
-
-Started POST "/instructors" for ::1 at 2022-02-06 15:38:03 -0500
-Processing by InstructorsController#create as TURBO_STREAM
-  Parameters: {"authenticity_token"=>"[FILTERED]", "instructor"=>{"name"=>"I1", "user_email"=>"1@i.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "department"=>"csc"}, "commit"=>"Create Instructor"}
-Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1101)
-
-
-  
-ActiveModel::UnknownAttributeError (unknown attribute 'password' for Instructor.):
-  
-app/controllers/instructors_controller.rb:24:in `create'
-Started GET "/" for ::1 at 2022-02-06 15:39:50 -0500
-  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 707)
-  Rendered layout layouts/application.html.erb (Duration: 18.6ms | Allocations: 36503)
-Completed 200 OK in 25ms (Views: 20.4ms | ActiveRecord: 0.0ms | Allocations: 42472)
-
-
-Started GET "/instructors/new" for ::1 at 2022-02-06 15:39:52 -0500
-Processing by InstructorsController#new as HTML
-Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms | Allocations: 2869)
-
-
-  
-LoadError (cannot load such file -- bcrypt):
-  
-app/models/instructor.rb:2:in `<class:Instructor>'
-app/models/instructor.rb:1:in `<main>'
-app/controllers/instructors_controller.rb:15:in `new'
-Started GET "/instructors/new" for ::1 at 2022-02-06 15:42:25 -0500
-  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by InstructorsController#new as HTML
-Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms | Allocations: 5442)
-
-
+[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-02-06 21:30:37.239597"], ["updated_at", "2022-02-06 21:30:37.239597"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2022-02-06 21:30:37.247659"], ["key", "environment"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "a7ef49de7524579a999bd8d188e4a2b8551ff899"], ["created_at", "2022-02-06 21:30:37.255068"], ["updated_at", "2022-02-06 21:30:37.255068"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to MigScript (20220206212832)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (4.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to MigScript (20220206212832)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ainstructors" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_email" varchar DEFAULT NULL, "password_digest" varchar DEFAULT NULL, "department" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_ainstructors_on_user_email" ON "ainstructors" ("user_email")[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "ainstructors" ("id","name","user_email","password_digest","department","created_at","updated_at")
+                     SELECT "id","name","user_email","password_digest","department","created_at","updated_at" FROM "instructors"[0m
+  [1m[35m (3.3ms)[0m  [1m[35mDROP TABLE "instructors"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "instructors" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_email" varchar DEFAULT NULL, "password_digest" varchar DEFAULT NULL, "department" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_adb8ebb749"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to MigScript (20220206212832)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ainstructors" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_email" varchar DEFAULT NULL, "password_digest" varchar DEFAULT NULL, "department" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_ainstructors_on_user_email" ON "ainstructors" ("user_email")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "ainstructors" ("id","name","user_email","password_digest","department","created_at","updated_at")
+                     SELECT "id","name","user_email","password_digest","department","created_at","updated_at" FROM "instructors"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "instructors"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "instructors" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_email" varchar DEFAULT NULL, "password_digest" varchar DEFAULT NULL, "department" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_adb8ebb749"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[31mrollback transaction[0m
   
 LoadError (cannot load such file -- bcrypt):
   
