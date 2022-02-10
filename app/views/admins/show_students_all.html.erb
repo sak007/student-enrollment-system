@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Students</h1>
+
+<div id="admins">
+  <% @studentsCont.each do |student| %>
+    <%= render student %>
+    <p>
+    <%= link_to "Edit this student", edit_student_path(student) %> 
+   
+      <%= button_to "Destroy this student", student, method: :delete %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
+

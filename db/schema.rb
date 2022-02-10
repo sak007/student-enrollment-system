@@ -35,6 +35,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_06_215257) do
     t.string "room"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "instructor_id", null: false
+    t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -76,4 +78,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_06_215257) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "courses", "instructors"
 end

@@ -6,9 +6,27 @@
   <% @students.each do |student| %>
     <%= render student %>
     <p>
-      <%= link_to "Show this student", student %>
+    <%   if session[:admin]%>
+    <%= button_to "Destroy this student", student, method: :delete %>
+    <%= link_to "Show this student", student %>
+    <% else %>
+    <%= link_to "Show this student", student %>
+
+
+    <% end %>
     </p>
   <% end %>
 </div>
 
+<%   if session[:admin]%>
+<p>
+hi
+<%= session[:admin]%>
+</p>
+<%else%>
+
+
 <%= link_to "New student", new_student_path %>
+<% end %>
+
+

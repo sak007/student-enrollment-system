@@ -13,6 +13,9 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
+    if params[:admin]
+      session[:admin]=params[:admin]
+      end
   end
 
   # GET /courses/1/edit
@@ -25,8 +28,13 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        if session[:admin]
+          format.html{redirect_to admins_path, notice: "Course was successfully created." }
+         
+         else
         format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
+         end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -38,8 +46,13 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+        if session[:admin]
+          format.html { redirect_to showCoursesAll_path, notice: "Course was successfully updated." }
+          format.json { render :show, status: :ok, location: @student }
+        else
         format.html { redirect_to course_url(@course), notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -52,8 +65,13 @@ class CoursesController < ApplicationController
     @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
-      format.json { head :no_content }
+      if session[:admin]
+        format.html { redirect_to showCoursesAll_path, notice: "Course was successfully destroyed." }
+        format.json { head :no_content }
+      else  
+        format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 

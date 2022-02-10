@@ -5,7 +5,15 @@ class AdminsController < ApplicationController
   def index
     @admins = Admin.all
   end
-
+  def show_students_all
+    @studentsCont = Student.all
+  end
+  def show_all_instructors
+    @instructorsCont = Instructor.all
+  end
+  def show_all_courses
+    @coursesAll = Course.all
+  end
   # GET /admins/1 or /admins/1.json
   def show
   end

@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Instructors</h1>
+
+<div id="admins">
+  <% @instructorsCont.each do |instructor| %>
+    <%= render instructor %>
+    <p>
+    <%= link_to "Edit this Instructor", edit_instructor_path(instructor) %> 
+   
+      <%= button_to "Delete this Instructor", instructor, method: :delete %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Create A New Instructor", new_instructor_path(:admin=>"admin") %>
+

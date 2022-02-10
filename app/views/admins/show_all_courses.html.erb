@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Courses</h1>
+
+<div id="admins">
+  <% @coursesAll.each do |course| %>
+    <%= render course %>
+    <p>
+    <%= link_to "Edit this Course", edit_course_path(@course) %> 
+   
+      <%= button_to "Delete this Course",  @course, method: :delete %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Create A New Course", new_course_path(:admin=>"admin") %>
+

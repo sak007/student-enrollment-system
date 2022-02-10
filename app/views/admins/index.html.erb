@@ -11,4 +11,7 @@
   <% end %>
 </div>
 
-<%= link_to "New admin", new_admin_path %>
+<%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
+<%= link_to "Show All Students", showStudentsAll_path %>
+<%= link_to "Show All Courses", showAllCourses_path %>
+<%= link_to "Show All Instrutors", showAllInstructors_path %>

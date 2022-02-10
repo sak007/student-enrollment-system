@@ -5,5 +5,11 @@
 <br>
 
 <div>
+<%if params[:admin]%>
+<%= link_to "Back to admin", admins_path %>
+
+<% else %>
+
   <%= link_to "Back to students", students_path %>
+  <%end%>
 </div>
