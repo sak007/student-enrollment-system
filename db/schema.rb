@@ -10,22 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_190416) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_02_06_215257) do
   create_table "admins", force: :cascade do |t|
     t.string "name"
     t.string "user_email"
     t.integer "phone"
     t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_email"], name: "index_admins_on_user_email", unique: true
   end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "instructor_id"
     t.string "weekday1"
     t.string "weekday2"
     t.string "starttime"
@@ -35,16 +33,18 @@ ActiveRecord::Schema.define(version: 2022_02_06_190416) do
     t.integer "wlcapacity"
     t.string "status"
     t.string "room"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "instructor_id", null: false
+    t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
     t.integer "course_id"
     t.integer "student_id"
     t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 2022_02_06_190416) do
     t.string "user_email"
     t.string "password_digest"
     t.string "department"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_email"], name: "index_instructors_on_user_email", unique: true
   end
 
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2022_02_06_190416) do
     t.string "user_email"
     t.integer "phone"
     t.string "major"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_email"], name: "index_students_on_user_email", unique: true
   end
 
@@ -73,9 +73,10 @@ ActiveRecord::Schema.define(version: 2022_02_06_190416) do
     t.string "email"
     t.string "password_digest"
     t.string "role"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "courses", "instructors"
 end

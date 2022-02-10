@@ -13,30 +13,28 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name , :readonly => true%>
   </div>
 
   <div>
     <%= form.label :user_email, style: "display: block" %>
-    <%= form.text_field :user_email %>
+    <%= form.text_field :user_email, :readonly => true %>
   </div>
 
   <div>
     <%= form.label :phone, style: "display: block" %>
-    <%= form.number_field :phone %>
+    <%= form.number_field :phone, :readonly => true %>
   </div>
 
   <div>
     <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, :readonly => true %>
   </div>
 
   <div>
     <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, :readonly => true %>
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+ 
 <% end %>

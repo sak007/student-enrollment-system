@@ -3,8 +3,11 @@
 <%= render @admin %>
 
 <div>
-  <%= link_to "Edit this admin", edit_admin_path(@admin) %> |
-  <%= link_to "Back to admins", admins_path %>
 
-  <%= button_to "Destroy this admin", @admin, method: :delete %>
+<%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
+<%= link_to "Show All Students", students_path, method: :get  %>
+<%= link_to "Show All Courses", courses_path %>
+<%= link_to "Show All Instrutors",instructors_path %>
+
+ 
 </div>

@@ -6,9 +6,26 @@
   <% @instructors.each do |instructor| %>
     <%= render instructor %>
     <p>
-      <%= link_to "Show this instructor", instructor %>
+    <%   if session[:role]=="ADMIN"%>
+    <%= button_to "Destroy this instructor", instructor, method: :delete %>
+    <%= link_to "Show this instructor", instructor %>
+    <% else %>
+    <%= link_to "Show this instructor", instructor %>
+
+
+    <% end %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New instructor", new_instructor_path %>
+
+<%   if session[:role]=="ADMIN"%>
+<p>
+<%= link_to "Create A Instructor", new_instructor_path(:admin=>"admin") %>
+<%= link_to "Back  to admin", admin_path(session[:adminId])%>
+</p>
+<%else%>
+
+
+<%= link_to "New Instructor", new_instructor_path %>
+<% end %>

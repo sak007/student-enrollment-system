@@ -13,6 +13,9 @@ class InstructorsController < ApplicationController
   # GET /instructors/new
   def new
     @instructor = Instructor.new
+    if params[:admin]
+      session[:admin]=params[:admin]
+      end
   end
 
   # GET /instructors/1/edit
@@ -25,13 +28,19 @@ class InstructorsController < ApplicationController
 
     respond_to do |format|
       if @instructor.save
-        format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully created." }
-        format.json { render :show, status: :created, location: @instructor }
+        
         @user = User.new
         @user.email = @instructor.user_email
         @user.password_digest = @instructor.password_digest
         @user.role = 'INSTRUCTOR'
         @user.save
+        if session[:admin]
+          format.html{redirect_to admin_path(session[:adminId]), notice: "Instructor was successfully created." }
+         
+         else
+        format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully created." }
+        format.json { render :show, status: :created, location: @instructor }
+         end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @instructor.errors, status: :unprocessable_entity }
@@ -43,8 +52,14 @@ class InstructorsController < ApplicationController
   def update
     respond_to do |format|
       if @instructor.update(instructor_params)
-        format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully updated." }
+        if session[:admin]
+          format.html { redirect_to instructors_path, notice: "Instructor was successfully updated." }
+          format.json { render :show, status: :ok, location: @instructor }
+        else
+          format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully updated." }
         format.json { render :show, status: :ok, location: @instructor }
+        end
+        
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @instructor.errors, status: :unprocessable_entity }
@@ -57,8 +72,14 @@ class InstructorsController < ApplicationController
     @instructor.destroy
 
     respond_to do |format|
+      if session[:admin]
+        format.html { redirect_to instructors_path, notice: "Instructor was successfully destroyed." }
+        format.json { head :no_content }
+
+      else
       format.html { redirect_to instructors_url, notice: "Instructor was successfully destroyed." }
       format.json { head :no_content }
+      end
     end
   end
 
