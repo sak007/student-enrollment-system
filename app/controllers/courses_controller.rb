@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
     respond_to do |format|
       if @course.save
         if session[:admin]
-          format.html{redirect_to admins_path, notice: "Course was successfully created." }
+          format.html{redirect_to admin_path(session[:adminId]), notice: "Course was successfully created." }
          
          else
         format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
@@ -47,8 +47,8 @@ class CoursesController < ApplicationController
     respond_to do |format|
       if @course.update(course_params)
         if session[:admin]
-          format.html { redirect_to showCoursesAll_path, notice: "Course was successfully updated." }
-          format.json { render :show, status: :ok, location: @student }
+          format.html { redirect_to courses_path, notice: "Course was successfully updated." }
+          format.json { render :show, status: :ok, location: @course }
         else
         format.html { redirect_to course_url(@course), notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
@@ -66,7 +66,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if session[:admin]
-        format.html { redirect_to showCoursesAll_path, notice: "Course was successfully destroyed." }
+        format.html { redirect_to courses_path, notice: "Course was successfully destroyed." }
         format.json { head :no_content }
       else  
         format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }

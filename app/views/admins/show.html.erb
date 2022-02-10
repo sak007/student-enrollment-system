@@ -4,8 +4,10 @@
 
 <div>
 
- 
-  <%= link_to "Back to admins", admins_path %>
+<%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
+<%= link_to "Show All Students", students_path, method: :get  %>
+<%= link_to "Show All Courses", courses_path %>
+<%= link_to "Show All Instrutors",instructors_path %>
 
  
 </div>

@@ -6,7 +6,7 @@
 
 <div>
  
-  <%= link_to "Back to students", request.referer.present? ? request.referer : showStudentsAll_path %>
+  <%= link_to "Back to students", request.referer.present? ? request.referer : students_path %>
 
 </div>
 <% if session[:admin]%>

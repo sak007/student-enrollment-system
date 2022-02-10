@@ -3,15 +3,15 @@ Rails.application.routes.draw do
   resources :courses
   resources :students
   resources :instructors
-  resources :admins
+  resources :admins, only: [:update, :show]
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   get 'home/index'
   root 'home#index'
-  get 'showStudentsAdmin', to: "admins#show_students_all", as: 'showStudentsAll'
-  get 'showCoursesAdmin', to: "admins#show_all_courses", as: 'showAllCourses'
+  
   get 'showInstructorsAdmin', to: "admins#show_all_instructors", as: 'showAllInstructors'
   get 'login', to: "sessions#new", as: 'login'
+  get 'logout', to: "sessions#destroy", as: 'logout'
  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

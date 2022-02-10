@@ -35,7 +35,7 @@ class InstructorsController < ApplicationController
         @user.role = 'INSTRUCTOR'
         @user.save
         if session[:admin]
-          format.html{redirect_to admins_path, notice: "Instructor was successfully created." }
+          format.html{redirect_to admin_path(session[:adminId]), notice: "Instructor was successfully created." }
          
          else
         format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully created." }
@@ -53,7 +53,7 @@ class InstructorsController < ApplicationController
     respond_to do |format|
       if @instructor.update(instructor_params)
         if session[:admin]
-          format.html { redirect_to showAllInstructors_path, notice: "Instructor was successfully updated." }
+          format.html { redirect_to instructors_path, notice: "Instructor was successfully updated." }
           format.json { render :show, status: :ok, location: @instructor }
         else
           format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully updated." }
@@ -73,7 +73,7 @@ class InstructorsController < ApplicationController
 
     respond_to do |format|
       if session[:admin]
-        format.html { redirect_to showAllInstructors_path, notice: "Instructor was successfully destroyed." }
+        format.html { redirect_to instructors_path, notice: "Instructor was successfully destroyed." }
         format.json { head :no_content }
 
       else

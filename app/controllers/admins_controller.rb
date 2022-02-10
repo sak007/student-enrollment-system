@@ -4,6 +4,7 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
+    redirect_to admin_path session[:adminId]
   end
   def show_students_all
     @studentsCont = Student.all
@@ -33,6 +34,11 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
+        @user = User.new
+        @user.email = @admin.user_email
+        @user.password_digest = @admin.password_digest
+        @user.role = 'ADMIN'
+        @user.save
         format.html { redirect_to admin_url(@admin), notice: "Admin was successfully created." }
         format.json { render :show, status: :created, location: @admin }
       else

@@ -6,9 +6,27 @@
   <% @courses.each do |course| %>
     <%= render course %>
     <p>
-      <%= link_to "Show this course", course %>
+    <%   if session[:role]=="ADMIN"%>
+    <%= button_to "Destroy this course", course, method: :delete %>
+    <%= link_to "Show this course", course %>
+    <% else %>
+    <%= link_to "Show this course", course %>
+
+
+    <% end %>
+    
     </p>
   <% end %>
 </div>
 
-<%= link_to "New course", new_course_path %>
+
+<%   if session[:role]=="ADMIN"%>
+<p>
+<%= link_to "Create A Course", new_course_path(:admin=>"admin") %>
+<%= link_to "Back  to admin", admin_path(session[:adminId])%>
+</p>
+<%else%>
+
+
+<%= link_to "New Course", new_course_path %>
+<% end %>

@@ -6,7 +6,7 @@
 
 <div>
 <%if params[:admin]%>
-<%= link_to "Back to admin", admins_path %>
+<%= link_to "Back to admin",  admin_path(session[:adminId]) %>
 
 <% else %>
 
