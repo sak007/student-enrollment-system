@@ -11,67 +11,139 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <p>Course List</p>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, :id => 'name' %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, :id => 'description' %>
   </div>
 
-  <div>
-    <%= form.label :instructor_id, style: "display: block" %>
-    <%= form.number_field :instructor_id %>
+  <div class="field">
+    <%= form.hidden_field :id, value: course.id %>
   </div>
 
-  <div>
-    <%= form.label :weekday1, style: "display: block" %>
-    <%= form.text_field :weekday1 %>
+  <div class="field">
+    <%= form.label :instructor_id, "Instructor Id" %>
+    <%= form.collection_select :instructor_id, Instructor.all, :id, :name, include_blank: false %>
   </div>
 
-  <div>
-    <%= form.label :weekday2, style: "display: block" %>
-    <%= form.text_field :weekday2 %>
+  <div class="field">
+    <%= form.label :weekday1 %>
+    <%= form.text_field :weekday1, :id => 'weekday1' %>
   </div>
 
-  <div>
-    <%= form.label :starttime, style: "display: block" %>
-    <%= form.text_field :starttime %>
+  <div class="field">
+    <%= form.label :weekday2 %>
+    <%= form.text_field :weekday2, :id => 'weekday2' %>
   </div>
 
-  <div>
-    <%= form.label :endtime, style: "display: block" %>
-    <%= form.text_field :endtime %>
+  <div class="field">
+    <%= form.label :starttime %>
+    <%= form.text_field :starttime, :id => 'starttime' %>
   </div>
 
-  <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.text_field :code %>
+  <div class="field">
+    <%= form.label :endtime %>
+    <%= form.text_field :endtime, :id => 'endtime' %>
   </div>
 
-  <div>
-    <%= form.label :capacity, style: "display: block" %>
-    <%= form.number_field :capacity %>
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code, :id => 'code' %>
   </div>
 
-  <div>
-    <%= form.label :wlcapacity, style: "display: block" %>
-    <%= form.number_field :wlcapacity %>
+  <div class="field">
+    <%= form.label :capacity %>
+    <%= form.number_field :capacity, :id => 'capacity' %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+  <div class="field">
+    <%= form.label :wlcapacity %>
+    <%= form.number_field :wlcapacity, :id => 'wlcapacity' %>
   </div>
 
-  <div>
-    <%= form.label :room, style: "display: block" %>
-    <%= form.text_field :room %>
+<!--  <div class="field">-->
+    <%#= form.label :status %>
+    <%#= form.text_field :status, :id => 'status', :readonly => true %>
+<!--  </div>-->
+
+  <div class="field">
+    <%= form.label :room %>
+    <%= form.text_field :room, :id => 'room' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="actions">
+    <%= form.submit "Add Course" %>
   </div>
-<% end %>
+
+  <% end %>
+
+<!--  <div>-->
+    <%#= form.label :name, style: "display: block" %>
+    <%#= form.text_field :name %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :description, style: "display: block" %>
+    <%#= form.text_field :description %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :instructor_id, style: "display: block" %>
+    <%#= form.number_field :instructor_id %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :weekday1, style: "display: block" %>
+    <%#= form.text_field :weekday1 %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :weekday2, style: "display: block" %>
+    <%#= form.text_field :weekday2 %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :starttime, style: "display: block" %>
+    <%#= form.text_field :starttime %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :endtime, style: "display: block" %>
+    <%#= form.text_field :endtime %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :code, style: "display: block" %>
+    <%#= form.text_field :code %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :capacity, style: "display: block" %>
+    <%#= form.number_field :capacity %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :wlcapacity, style: "display: block" %>
+    <%#= form.number_field :wlcapacity %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :status, style: "display: block" %>
+    <%#= form.text_field :status %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :room, style: "display: block" %>
+    <%#= form.text_field :room %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>

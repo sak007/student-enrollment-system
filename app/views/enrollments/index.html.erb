@@ -2,13 +2,19 @@
 
 <h1>Enrollments</h1>
 
+<% if session[:role] == 'STUDENT' %>
+  <% enrollments = @enrollments.where(student_id: session[:id]) %>
+<% elsif session[:role] == 'INSTRUCTOR' %>
+  <% enrollments = @enrollments.where(course_id: Course.where(instructor_id: session[:id]).pluck(:id)) %>
+<% elsif session[:role] == 'ADMIN' %>
+  <% enrollments = @enrollments %>
+<% end %>
+
 <div id="enrollments">
-  <% @enrollments.each do |enrollment| %>
+  <% enrollments.each do |enrollment| %>
     <%= render enrollment %>
     <p>
       <%= link_to "Show this enrollment", enrollment %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New enrollment", new_enrollment_path %>

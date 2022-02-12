@@ -53,6 +53,7 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
+    debugger
     respond_to do |format|
       if @student.update(student_params)
         if session[:admin]
@@ -73,7 +74,7 @@ class StudentsController < ApplicationController
   # DELETE /students/1 or /students/1.json
   def destroy
     @student.destroy
-   
+    User.find_by_email(@student.user_email).destroy
     respond_to do |format|
       if session[:admin]
         format.html { redirect_to students_path, notice: "Student was successfully destroyed." }

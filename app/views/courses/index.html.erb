@@ -1,32 +1,113 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>Courses</h1>
 
 <div id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-    <%   if session[:role]=="ADMIN"%>
-    <%= button_to "Destroy this course", course, method: :delete %>
-    <%= link_to "Show this course", course %>
-    <% else %>
-    <%= link_to "Show this course", course %>
+    <table>
+      <thead>
+      <tr>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Instructor</th>
+        <th>Weekdays</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+<!--        <th>Capacity</th>-->
+<!--        <th>WL Capacity</th>-->
+        <th>Room</th>
+        <th>Status</th>
+        <th colspan="4"></th>
+      </tr>
+      </thead>
 
+      <tbody>
+      <% if session[:role] == 'STUDENT' %>
+        <% courses = @courses.where.not(id: Enrollment.where(student_id: session[:id]).pluck(:course_id)) %>
+      <% elsif session[:role] == 'INSTRUCTOR'%>
+        <% courses = @courses.find_by_instructor_id(session[:id]) %>
+      <% elsif session[:role] == 'ADMIN'%>
+        <% courses = @courses %>
+      <% end %>
+      <% courses.each do |course| %>
+        <tr>
+          <td><%= course.code %></td>
+          <td><%= course.name %></td>
+          <td><%= course.description %></td>
+          <td><%= course.instructor.name %></td>
+          <td><%= course.weekday1 + "/" + course.weekday2%></td>
+          <td><%= course.starttime %></td>
+          <td><%= course.endtime %></td>
+          <td><%= course.room %></td>
+          <td><%= course.status %></td>
+          <td><%= button_to 'Show', course, method: :get %></td>
+          <% if session[:role] == 'STUDENT' and course.status != 'CLOSED' %>
+            <td><%= button_to 'Enroll', new_enrollment_path, method: :get, params: { :course_id => course.id } %></td>
+          <% end %>
+<!--          <td><%#= link_to 'Edit', edit_product_path(product) %></td>-->
+<!--          <td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+<!--          <td><%#= link_to_if product.quantity > 0, 'Purchase this product', new_transaction_path(:product_id => product.id) %></td>-->
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-    <% end %>
-    
-    </p>
-  <% end %>
+  <%# @courses.each do |course| %>
+    <%#= render course %>
+<!--    <p>-->
+      <%#= link_to "Show this course", course %>
+<!--    </p>-->
+  <%# end %>
 </div>
 
+<% if session[:role] == 'STUDENT' %>
+<h1>Enrolled Courses</h1>
+<div id="enrolled_courses">
+  <table>
+    <thead>
+    <tr>
+      <th>Course Code</th>
+      <th>Course Name</th>
+      <th>Description</th>
+      <th>Instructor</th>
+      <th>Weekdays</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <!--        <th>Capacity</th>-->
+      <!--        <th>WL Capacity</th>-->
+      <th>Room</th>
+      <th>Status</th>
+      <th colspan="4"></th>
+    </tr>
+    </thead>
 
-<%   if session[:role]=="ADMIN"%>
-<p>
-<%= link_to "Create A Course", new_course_path(:admin=>"admin") %>
-<%= link_to "Back  to admin", admin_path(session[:adminId])%>
-</p>
-<%else%>
+    <tbody>
+    <% courses = @courses.where(id: Enrollment.where(student_id: session[:id]).pluck(:course_id)) %>
+    <% courses.each do |course| %>
+      <tr>
+        <td><%= course.code %></td>
+        <td><%= course.name %></td>
+        <td><%= course.description %></td>
+        <td><%= course.instructor.name %></td>
+        <td><%= course.weekday1 + "/" + course.weekday2%></td>
+        <td><%= course.starttime %></td>
+        <td><%= course.endtime %></td>
+        <td><%= course.room %></td>
+        <td><%= Enrollment.find_by(course_id: course.id, student_id: session[:id]).status %></td>
+        <td><%= button_to 'Show', course, method: :get %></td>
+        <td><%= button_to 'Uneroll', Enrollment.find_by(course_id: course.id, student_id: session[:id]), method: :delete   %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 
+</div>
+<% end %>
 
-<%= link_to "New Course", new_course_path %>
+<% if session[:role] == "ADMIN"%>
+  <p>
+    <%= link_to "Create A Course", new_course_path(:admin=>"admin") %>
+    <%= link_to "Back  to admin", admin_path(session[:adminId])%>
+  </p>
+<%elsif session[:role] == 'INSTRUCTOR'%>
+  <%= link_to "New Course", new_course_path %>
 <% end %>

@@ -36,3 +36,4 @@
 
 .idea/*
 Gemfile.lock
+.byebug_history

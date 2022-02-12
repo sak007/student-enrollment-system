@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user] = "test@gmail.com"
       session[:role]="ADMIN"
       admin = Admin.find_by_user_email(params[:user_email])
-      session[:adminId]= admin.id
+      session[:id] = admin.id
       redirect_to admin_path admin.id
       
     
@@ -16,15 +16,13 @@ class SessionsController < ApplicationController
       session[:user] = user.email
       session[:role]=user.role
       case user.role
-      when 'ADMIN'
-        admin = Admin.find_by_user_email(params[:user_email])
-        redirect_to admin_path admin.id
-        
       when 'INSTRUCTOR'
         instructor = Instructor.find_by_user_email(params[:user_email])
+        session[:id] = instructor.id
         redirect_to instructor_path instructor.id
       when 'STUDENT'
         student = Student.find_by_user_email(params[:user_email])
+        session[:id] = student.id
         redirect_to student_path student.id
       else
         flash.now[:alert] = "Invalid user role"

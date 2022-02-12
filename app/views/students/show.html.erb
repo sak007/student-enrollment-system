@@ -3,13 +3,12 @@
 <%= render @student %>
 
 <div>
-<% if params[:admin]%>
-  <p>hi</p>
-<%end%>
-  <%= link_to "Edit this student", edit_student_path(@student) %> |
-  <%= link_to "Back to students", request.referer.present? ? request.referer : default_path %>
+  <%= button_to "List Available Courses", courses_path, method: :get %> <br>
+  <%#= link_to "Back to students", request.referer.present? ? request.referer : default_path %>
 
+  <%#   if session[:role]=="ADMIN"%>
 
+  <%= button_to "Edit details", edit_student_path(@student), method: :get %> <br>
 
-  <%= button_to "Destroy this student", @student, method: :delete %>
+  <%= button_to 'Delete Account', @student, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
 </div>
