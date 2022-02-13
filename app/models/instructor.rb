@@ -1,6 +1,6 @@
 class Instructor < ApplicationRecord
   has_secure_password
-  has_many :course
+  has_many :course, dependent: :delete_all
   validates :user_email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP,
   message: "Please Enter a valid email ID" }
   validates :name, presence: true

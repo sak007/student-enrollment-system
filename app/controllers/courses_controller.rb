@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
-
   # GET /courses or /courses.json
   def index
     @courses = Course.all
@@ -25,7 +24,7 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
-    update_status(@course)
+    helpers.update_course_status(@course)
 
     respond_to do |format|
       if @course.save
@@ -46,7 +45,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1 or /courses/1.json
   def update
     @course.assign_attributes(course_params)
-    update_status(@course)
+    helpers.update_course_status(@course)
     respond_to do |format|
       if @course.update(course_params)
         if session[:admin]
@@ -88,18 +87,4 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:name, :description, :instructor_id, :weekday1, :weekday2, :starttime, :endtime, :code, :capacity, :wlcapacity, :status, :room)
     end
-
-  def update_status(course)
-    enrolled = Enrollment.where(course_id: course.id, status: 'OPEN').count
-    wl = Enrollment.where(course_id: course.id, status: 'WAITLIST').count
-
-    if course.capacity - enrolled > 0
-      course.status = "OPEN"
-    elsif course.wlcapacity - wl > 0
-      course.status = "WAITLIST"
-    else
-      course.status = "CLOSED"
-    end
-
-  end
 end

@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Project2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Project 2</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<h1>Student Enrollment system</h1>
+<!--<p>Tag line...</p>-->
+<p>
+<% if session[:role] %>
+  <% if session[:role] == 'ADMIN' %>
+    Name: <%= session[:user_name] %> | Role: <u><%= session[:role] %></u>
+  <% elsif session[:role] == 'INSTRUCTOR' %>
+    Name: <%= session[:user_name] %> | Role: <b><i><%= session[:role] %></i></b>
+  <% elsif session[:role] == 'STUDENT' %>
+    Name: <%= session[:user_name] %> | Role: <b><%= session[:role] %></b>
+  <% end %>
+<% end %>
+</p>
+<%= link_to 'Home page', root_path %>
+<% if session[:id] %>
+  <%= link_to "Logout", logout_path %>
+<% end %>
+<%= yield %>
+</body>
 </html>

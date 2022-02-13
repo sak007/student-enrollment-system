@@ -24,7 +24,7 @@
       <% if session[:role] == 'STUDENT' %>
         <% courses = @courses.where.not(id: Enrollment.where(student_id: session[:id]).pluck(:course_id)) %>
       <% elsif session[:role] == 'INSTRUCTOR'%>
-        <% courses = @courses.find_by_instructor_id(session[:id]) %>
+        <% courses = @courses.where(instructor_id: session[:id]) %>
       <% elsif session[:role] == 'ADMIN'%>
         <% courses = @courses %>
       <% end %>
@@ -94,7 +94,7 @@
         <td><%= course.room %></td>
         <td><%= Enrollment.find_by(course_id: course.id, student_id: session[:id]).status %></td>
         <td><%= button_to 'Show', course, method: :get %></td>
-        <td><%= button_to 'Uneroll', Enrollment.find_by(course_id: course.id, student_id: session[:id]), method: :delete   %></td>
+        <td><%= button_to 'Drop', Enrollment.find_by(course_id: course.id, student_id: session[:id]), method: :delete   %></td>
       </tr>
     <% end %>
     </tbody>

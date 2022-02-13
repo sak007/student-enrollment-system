@@ -20,10 +20,13 @@ class EnrollmentsController < ApplicationController
       else
         @enrollment.student_id = session[:id]
         @enrollment.course_id = course.id
-        @enrollment.status = course.status
+        if course.status == 'OPEN'
+          @enrollment.status = 'ENROLLED'
+        else
+          @enrollment.status = 'WAITLIST'
+        end
         @enrollment.save
-        update_status(course)
-        course.save
+        helpers.update_course_status(course)
         redirect_to courses_path
       end
     end
@@ -65,7 +68,7 @@ class EnrollmentsController < ApplicationController
   def destroy
     course = Course.find(@enrollment.course_id)
     @enrollment.destroy
-    update_status(course)
+    helpers.update_course_status(course)
     respond_to do |format|
       format.html { redirect_to courses_url, notice: "Enrollment was successfully destroyed." }
       format.json { head :no_content }
@@ -81,18 +84,5 @@ class EnrollmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def enrollment_params
       params.require(:enrollment).permit(:course_id, :student_id, :status)
-    end
-
-    def update_status(course)
-      enrolled = Enrollment.where(course_id: course.id, status: 'OPEN').count
-      wl = Enrollment.where(course_id: course.id, status: 'WAITLIST').count
-      if course.capacity - enrolled > 0
-        course.status = "OPEN"
-      elsif course.wlcapacity - wl > 0
-        course.status = "WAITLIST"
-      else
-        course.status = "CLOSED"
-      end
-      course.save
     end
 end

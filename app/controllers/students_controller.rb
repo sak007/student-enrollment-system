@@ -1,9 +1,17 @@
 class StudentsController < ApplicationController
+  skip_before_action :authorized, only: [:new, :create]
   before_action :set_student, only: %i[ show edit update destroy ]
-
+  before_action :can_view, only: [:show]
+  before_action :can_update, only: [:edit, :update, :destroy]
   # GET /students or /students.json
   def index
-    @students = Student.all
+    if session[:role] == 'ADMIN'
+      @students = Student.all
+    elsif session[:role] == 'STUDENT'
+      @students = [Student.find(session[:id])]
+    elsif session[:role] == 'INSTRUCTOR'
+      @students = Student.where(id: Enrollment.where(course_id: Course.where(instructor_id: session[:id]).pluck(:id)).pluck(:student_id))
+    end
   end
 
   # GET /students/1 or /students/1.json
@@ -16,8 +24,6 @@ class StudentsController < ApplicationController
     if params[:admin]
     session[:admin]=params[:admin]
     end
-    
-    
   end
 
   # GET /students/1/edit
@@ -99,4 +105,24 @@ class StudentsController < ApplicationController
     def student_params
       params.require(:student).permit(:name, :password, :password_confirmation, :dob, :user_email, :phone, :major)
     end
+  
+  def can_delete
+    if session[:role] == 'STUDENT'
+      if session[:id] != @student.id
+        redirect_to root_path
+      end
+    elsif session[:role] != 'ADMIN'
+      redirect_to root_path
+    end
+  end
+
+  def can_view
+    if session[:role] == 'INSTRUCTOR'
+      if Enrollment.where(course_id: Course.where(instructor_id: session[:id]).pluck(:id), student_id: @student.id).count == 0
+        redirect_to root_path
+      end
+    else
+      can_delete
+    end
+ end
 end
