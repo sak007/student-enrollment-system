@@ -20,9 +20,11 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
-    @student = Student.new
-    if params[:admin]
-    session[:admin]=params[:admin]
+    if session[:role] != 'INSTRUCTOR'
+      @student = Student.new
+      if params[:admin]
+      session[:admin]=params[:admin]
+      end
     end
   end
 
@@ -30,7 +32,19 @@ class StudentsController < ApplicationController
   def edit
    
   end
+  # GET/showAllStundets
+  def showAllStudents
+    if params[:status]="waitlist" and session[:role] == 'INSTRUCTOR'
+      @allStudents = Student.where(id: Enrollment.where("course_id=? AND status=?", params[:course_id], "WAITLIST").pluck(:student_id))
 
+    
+    elsif session[:role] == 'INSTRUCTOR'
+      @allStudents = Student.where.not(id: Enrollment.where(course_id: params[:course_id]).pluck(:student_id))
+    else
+      redirect_to root_path
+    end
+  
+  end
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)

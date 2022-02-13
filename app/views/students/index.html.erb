@@ -15,7 +15,7 @@
 
     <% end %>
     </p>
-  <% end %>
+ 
 </div>
 
 <%   if session[:role]=="ADMIN"%>
@@ -23,10 +23,20 @@
 <%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
 <%= link_to "Back  to admin", admin_path(session[:adminId])%>
 </p>
-<%else%>
+<%elsif session[:role]!="INSTRUCTOR"%>
 
 
 <%= link_to "New student", new_student_path %>
+<%elsif session[:role]=="INSTRUCTOR"%>
+
+<%if params[:course_id] %>
+<h1>
+
+<td><%= button_to 'Remove this Student', Enrollment.find_by(course_id: params[:course_id], student_id: student.id), method: :delete, params: { :course_id => params[:course_id] }  %></td>
+</h1>
+<% end%>
 <% end %>
-
-
+<%if session[:role]=="INSTRUCTOR"%>
+<%= button_to "Back  to instructors", instructor_path(session[:id])%>
+<%end %>
+<% end %>

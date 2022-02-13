@@ -103,7 +103,8 @@ class CoursesController < ApplicationController
   end
 
   def can_create
-    if session[:role] != 'ADMIN' or session[:role] != 'INSTRUCTOR'
+    
+    if session[:role] != 'ADMIN' and session[:role] != 'INSTRUCTOR' 
       redirect_to root_path
     end
   end

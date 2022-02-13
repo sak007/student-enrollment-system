@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   get 'login', to: "sessions#new", as: 'login'
   get 'logout', to: "sessions#destroy", as: 'logout'
+  get 'otherstudents', to: "students#showAllStudents"  
  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

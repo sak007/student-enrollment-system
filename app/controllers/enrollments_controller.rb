@@ -19,12 +19,15 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+   
+
     if params[:course_id]
       course = Course.find(params[:course_id])
       if course.status == "CLOSED"
         redirect_to courses_path
       else
-        @enrollment.student_id = session[:id]
+        student_id = session[:role] == "INSTRUCTOR" ? params[:student_id]: session[:id]
+        @enrollment.student_id = student_id
         @enrollment.course_id = course.id
         if course.status == 'OPEN'
           @enrollment.status = 'ENROLLED'
@@ -74,9 +77,13 @@ class EnrollmentsController < ApplicationController
   def destroy
     course = Course.find(@enrollment.course_id)
     @enrollment.destroy
+    msg= "You have dropped this course successfully."
     helpers.update_course_status(course)
+    if params[:course_id]
+      msg = "The student has been dropped successfully"
+    end
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Enrollment was successfully destroyed." }
+      format.html { redirect_to courses_url, notice: msg }
       format.json { head :no_content }
     end
   end
