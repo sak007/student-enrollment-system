@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_06_215257) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_13_190312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.string "name"
     t.string "user_email"
-    t.integer "phone"
+    t.bigint "phone"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_06_215257) do
     t.string "room"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "instructor_id", null: false
+    t.bigint "instructor_id", null: false
     t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
 
@@ -64,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_06_215257) do
     t.string "password_digest"
     t.date "dob"
     t.string "user_email"
-    t.integer "phone"
+    t.bigint "phone"
     t.string "major"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

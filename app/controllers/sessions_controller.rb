@@ -5,19 +5,15 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:user_email])
-    if params[:user_email] == "test@gmail.com" && params[:password]== "123456"
-      session[:user_email] = "test@gmail.com"
-      session[:role]="ADMIN"
-      admin = Admin.find_by_user_email(params[:user_email])
-      session[:user_name] = admin.name
-      session[:id] = admin.id
-      redirect_to admin_path admin.id
-      
-    
-    elsif user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password])
       session[:user_email] = user.email
       session[:role]=user.role
       case user.role
+      when 'ADMIN'
+        admin = Admin.find_by_user_email(params[:user_email])
+        session[:user_name] = admin.name
+        session[:id] = admin.id
+        redirect_to admin_path admin.id
       when 'INSTRUCTOR'
         instructor = Instructor.find_by_user_email(params[:user_email])
         session[:user_name] = instructor.name

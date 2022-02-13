@@ -35,5 +35,6 @@
 /config/master.key
 
 .idea/*
-Gemfile.lock
 .byebug_history
+
+.DS_Store

@@ -1,5 +1,10 @@
 # README
 
+## Deployment Information
+
+- URL: https://fierce-mesa-20166.herokuapp.com/
+- Admin credentials - admin@ses.com/admin
+
 ## Postgres setup
 
 elecute the following commands
