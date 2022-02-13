@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :can_edit, only: [:edit, :update, :destroy]
+  before_action :can_create, only: [:new, :create]
   # GET /courses or /courses.json
   def index
     @courses = Course.all
@@ -87,4 +89,22 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:name, :description, :instructor_id, :weekday1, :weekday2, :starttime, :endtime, :code, :capacity, :wlcapacity, :status, :room)
     end
+
+  def can_edit
+    if session[:role] == 'STUDENT'
+      redirect_to root_path
+    elsif session[:role] == 'INSTRUCTOR'
+      if @course.instructor_id != session[:id]
+        redirect_to root_path
+      end
+    elsif session[:role] != 'ADMIN'
+      redirect_to root_path
+    end
+  end
+
+  def can_create
+    if session[:role] != 'ADMIN' or session[:role] != 'INSTRUCTOR'
+      redirect_to root_path
+    end
+  end
 end

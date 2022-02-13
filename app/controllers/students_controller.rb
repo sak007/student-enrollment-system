@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   before_action :set_student, only: %i[ show edit update destroy ]
   before_action :can_view, only: [:show]
-  before_action :can_update, only: [:edit, :update, :destroy]
+  before_action :can_edit, only: [:edit, :update, :destroy]
   # GET /students or /students.json
   def index
     if session[:role] == 'ADMIN'
@@ -59,7 +59,6 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
-    debugger
     respond_to do |format|
       if @student.update(student_params)
         if session[:admin]
@@ -80,7 +79,7 @@ class StudentsController < ApplicationController
   # DELETE /students/1 or /students/1.json
   def destroy
     @student.destroy
-    User.find_by_email(@student.user_email).destroy
+    @user.destroy
     respond_to do |format|
       if session[:admin]
         format.html { redirect_to students_path, notice: "Student was successfully destroyed." }
@@ -99,6 +98,7 @@ class StudentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+      @user = User.find_by_email(@student.user_email)
     end
     
     # Only allow a list of trusted parameters through.
@@ -106,7 +106,7 @@ class StudentsController < ApplicationController
       params.require(:student).permit(:name, :password, :password_confirmation, :dob, :user_email, :phone, :major)
     end
   
-  def can_delete
+  def can_edit
     if session[:role] == 'STUDENT'
       if session[:id] != @student.id
         redirect_to root_path
@@ -122,7 +122,7 @@ class StudentsController < ApplicationController
         redirect_to root_path
       end
     else
-      can_delete
+      can_edit
     end
  end
 end

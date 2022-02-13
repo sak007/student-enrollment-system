@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :students
   resources :instructors
   resources :admins, only: [:update, :show]
-  resources :users
   resources :sessions, only: [:new, :create, :destroy]
   get 'home/index'
   root 'home#index'

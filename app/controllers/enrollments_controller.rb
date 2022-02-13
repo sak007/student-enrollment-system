@@ -1,9 +1,15 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: %i[ show edit update destroy ]
-
+  before_action :can_delete, only: [:destroy, :show]
   # GET /enrollments or /enrollments.json
   def index
-    @enrollments = Enrollment.all
+    if session[:role] == 'ADMIN'
+      @enrollments = Enrollment.all
+    elsif session[:role] == 'STUDENT'
+      @enrollments = Enrollment.where(student_id: session[:id])
+    elsif session[:role] == 'INSTRUCTOR'
+      @enrollments = Enrollment.where(course_id: Course.where(instructor_id: session[:id]).pluck(:course_id))
+    end
   end
 
   # GET /enrollments/1 or /enrollments/1.json
@@ -84,5 +90,19 @@ class EnrollmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def enrollment_params
       params.require(:enrollment).permit(:course_id, :student_id, :status)
+    end
+
+    def can_delete
+      if session[:role] == 'STUDENT'
+        if @enrollment.student_id != session[:id]
+          redirect_to root_path
+        end
+      elsif session[:role] == 'INSTRUCTOR'
+        if Course.find(@enrollment.course_id).instructor_id != session[:id]
+          redirect_to root_path
+        end
+      elsif session[:role] != 'ADMIN'
+        redirect_to root_path
+      end
     end
 end

@@ -18,10 +18,9 @@ module CoursesHelper
   end
 
   private
-  def update_enrollment(course)
-    wle = Enrollment.where(course_id: course.id, status: 'WAITLIST').order("created_at").last
-    debugger
-    wle.status = 'ENROLLED'
-    wle.save
-  end
+    def update_enrollment(course)
+      wle = Enrollment.where(course_id: course.id, status: 'WAITLIST').order("created_at").last
+      wle.status = 'ENROLLED'
+      wle.save
+    end
 end

@@ -1,7 +1,8 @@
 class InstructorsController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   before_action :set_instructor, only: %i[ show edit update destroy ]
-
+  before_action :can_edit, only: [:edit, :update, :destroy]
+  before_action :can_create, only: [:new, :create]
   # GET /instructors or /instructors.json
   def index
     @instructors = Instructor.all
@@ -71,7 +72,7 @@ class InstructorsController < ApplicationController
   # DELETE /instructors/1 or /instructors/1.json
   def destroy
     @instructor.destroy
-
+    @user.destory
     respond_to do |format|
       if session[:admin]
         format.html { redirect_to instructors_path, notice: "Instructor was successfully destroyed." }
@@ -88,10 +89,32 @@ class InstructorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_instructor
       @instructor = Instructor.find(params[:id])
+      @user = User.find_by_email(@instructor.user_email)
     end
 
     # Only allow a list of trusted parameters through.
     def instructor_params
       params.require(:instructor).permit(:name, :user_email, :password, :password_confirmation, :department)
     end
+
+  def can_edit
+    if session[:role] == 'STUDENT'
+      redirect_to root_path
+    elsif session[:role] == 'INSTRUCTOR'
+      if @instructor.id != session[:id]
+        redirect_to root_path
+      end
+    elsif session[:role] != 'ADMIN'
+      redirect_to root_path
+    end
+  end
+
+  def can_create
+    if session[:role]
+      if session[:role] == 'STUDENT' or session[:role] == 'INSTRUCTOR'
+        redirect_to root_path
+      end
+    end
+  end
+
 end
