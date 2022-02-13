@@ -2,7 +2,7 @@
 
 ## Postgres setup
 
-elecute the following commands
+execute the following commands
 ```
 brew install postgres
 psql postgres #this will get u inside psql
