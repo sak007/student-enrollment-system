@@ -114,9 +114,7 @@
 <% if session[:role] == "ADMIN"%>
   <p>
     <%= link_to "Create A Course", new_course_path(:admin=>"admin") %>
-    <%= link_to "Back  to admin", admin_path(session[:adminId])%>
   </p>
 <%elsif session[:role] == 'INSTRUCTOR'%>
   <%= link_to "New Course", new_course_path %>
-  <%= link_to "Back  to instructors", instructor_path(session[:id])%>
 <% end %>

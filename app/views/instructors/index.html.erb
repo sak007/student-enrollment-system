@@ -22,7 +22,6 @@
 <%   if session[:role]=="ADMIN"%>
 <p>
 <%= link_to "Create A Instructor", new_instructor_path(:admin=>"admin") %>
-<%= link_to "Back  to admin", admin_path(session[:adminId])%>
 </p>
 <%elsif session[:role]!="INSTRUCTOR"%>
 
