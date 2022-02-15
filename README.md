@@ -87,3 +87,10 @@ The application can be accessed from localhost:3000
   - Rachana Kondabala - rkondab
   - Vishal Veera Reddy - vveerar2
 
+## All Entities
+Admin- Cant be deleted
+Instructor - If he is deleted all his courses are dropped and all the enrollements to that course are deleted.
+Courses- courses are dropped and all the enrollements to that courses are deleted.
+Students- When student is deleted all his enrollements are deleted.
+Enrollements- When enrollment is deleted the course status will be updated accordingly. If any waitlisted candidates then he will be enrolled if deleted one is   enrolled.
+
