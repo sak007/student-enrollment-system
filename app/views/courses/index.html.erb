@@ -15,7 +15,7 @@
 <!--        <th>Capacity</th>-->
 <!--        <th>WL Capacity</th>-->
         <th>Room</th>
-        <th>Status</th>
+        <th>Availability</th>
         <th colspan="4"></th>
       </tr>
       </thead>
@@ -45,11 +45,12 @@
           <% if session[:role] == 'STUDENT' and course.status != 'CLOSED' %>
             <td><%= button_to 'Enroll', new_enrollment_path, method: :get, params: { :course_id => course.id } %></td>
           <% end %>
-          <% if session[:role] == 'INSTRUCTOR' and course.status != 'CLOSED' %>
-          <td><%= button_to 'Enroll A New Student', otherstudents_path, method: :get, params: { :course_id => course.id } %></td>
-          <td><%= button_to 'Drop Student', students_path, method: :get, params: { :course_id => course.id } %></td>
-          <td><%= button_to 'Waitlisted Students', otherstudents_path, method: :get, params: { :course_id => course.id, :status=>"waitlist" } %></td>
-
+          <% if session[:role] == 'INSTRUCTOR' or session[:role] == 'ADMIN' %>
+              <td><%= button_to 'Enrolled Students', students_path, method: :get, params: { :course_id => course.id, :status=>"ENROLLED" } %></td>
+              <td><%= button_to 'Waitlisted Students', students_path, method: :get, params: { :course_id => course.id, :status=>"WAITLIST" } %></td>
+              <% if course.status != 'CLOSED' %>
+                <td><%= button_to 'Enroll Student', students_path, method: :get, params: { :course_id => course.id, :status=>"NOTENROLLED" } %></td>
+              <% end %>
           <% end %>
 <!--          <td><%#= link_to 'Edit', edit_product_path(product) %></td>-->
 <!--          <td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
