@@ -27,10 +27,12 @@
     <%= form.hidden_field :id, value: course.id %>
   </div>
 
-  <div class="field">
-    <%= form.label :instructor_id, "Instructor Id" %>
-    <%= form.collection_select :instructor_id, Instructor.all, :id, :name, include_blank: false %>
-  </div>
+  <% if session[:role] != 'INSTRUCTOR' %>
+    <div class="field">
+      <%= form.label :instructor_id, "Instructor Id" %>
+      <%= form.collection_select :instructor_id, Instructor.all, :id, :name, include_blank: false %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :weekday1 %>

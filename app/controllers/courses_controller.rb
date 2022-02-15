@@ -26,6 +26,11 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
+
+    if session[:role] == 'INSTRUCTOR'
+      @course.instructor_id = session[:id]
+    end
+
     helpers.update_course_status(@course)
 
     respond_to do |format|
