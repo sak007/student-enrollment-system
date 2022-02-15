@@ -25,3 +25,4 @@
 <p><%= button_to "New Instructor", new_instructor_path, method: :get %></p>
 
 <% end %>
+<p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>

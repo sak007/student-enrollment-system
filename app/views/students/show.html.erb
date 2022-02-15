@@ -12,4 +12,6 @@
   <% if session[:role] == 'STUDENT' or session[:role] == 'ADMIN' %>
     <p><%= button_to 'Delete Account', @student, method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
+  <p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
+
 </div>
