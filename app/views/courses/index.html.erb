@@ -68,6 +68,10 @@
   <%# end %>
 </div>
 
+<% if session[:role] == "ADMIN" or session[:role] == 'INSTRUCTOR'%>
+  <p> <%= button_to "New Course", new_course_path, method: :get %> </p>
+<% end %>
+
 <% if session[:role] == 'STUDENT' %>
 <h1>Enrolled Courses</h1>
 <div id="enrolled_courses">
@@ -112,10 +116,3 @@
 </div>
 <% end %>
 
-<% if session[:role] == "ADMIN"%>
-  <p>
-    <%= link_to "Create A Course", new_course_path(:admin=>"admin") %>
-  </p>
-<%elsif session[:role] == 'INSTRUCTOR'%>
-  <%= link_to "New Course", new_course_path %>
-<% end %>

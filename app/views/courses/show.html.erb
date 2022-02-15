@@ -5,7 +5,7 @@
 <div>
   <%= button_to "Back to courses", courses_path, method: :get %>
     <% if session[:role] == 'ADMIN' or session[:role] == 'INSTRUCTOR'%>
-      <%= button_to "Edit this course", edit_course_path(@course) , method: :get %>
-      <%= button_to "Destroy this course", @course, method: :delete %>
+    <p><%= button_to "Edit this course", edit_course_path(@course) , method: :get %></p>
+    <p><%= button_to "Destroy this course", @course, method: :delete %></p>
     <% end %>
   </div>

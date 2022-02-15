@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :students
   resources :instructors
-  resources :admins, only: [:update, :show]
+  resources :admins, only: [:update, :show, :edit]
   resources :sessions, only: [:new, :create, :destroy]
   get 'home/index'
   root 'home#index'

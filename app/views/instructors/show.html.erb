@@ -3,10 +3,16 @@
 <%= render @instructor %>
 
 <div>
-  <%= link_to "Edit this instructor", edit_instructor_path(@instructor) %> |
-  <%= link_to "Back to instructors", instructors_path %>
+  <p><%= button_to "Edit Details", edit_instructor_path(@instructor), method: :get %></p>
 
-  <%= button_to "Destroy this instructor", @instructor, method: :delete %>
+  <% if session[:role] == 'INSTRUCTOR' %>
+    <p><%= button_to "Show Courses", courses_path, method: :get %></p>
+  <% end %>
+
+  <p><%= button_to "Delete Acount", @instructor, method: :delete %></p>
+
+  <% if session[:role] == 'ADMIN' %>
+    <p><%= button_to "Back to instructors", instructors_path, method: :get %></p>
+  <% end %>
+
 </div>
-<%= link_to "Show Enrolled Students", students_path %><br/>
-<%= link_to "Show Your Courses", courses_path %>

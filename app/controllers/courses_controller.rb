@@ -35,13 +35,8 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        if session[:admin]
-          format.html{redirect_to admin_path(session[:adminId]), notice: "Course was successfully created." }
-         
-         else
         format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
-         end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }

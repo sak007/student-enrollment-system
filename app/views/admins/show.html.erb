@@ -4,10 +4,10 @@
 
 <div>
 
-<%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
-<%= link_to "Show All Students", students_path, method: :get  %>
-<%= link_to "Show All Courses", courses_path %>
-<%= link_to "Show All Instrutors",instructors_path %>
+  <p><%= button_to "Edit Details", edit_admin_path(@admin), method: :get %></p>
+  <p><%= button_to "Show All Students", students_path, method: :get  %></p>
+  <p><%= button_to "Show All Courses", courses_path, method: :get %></p>
+  <p><%= button_to "Show All Instructors",instructors_path, method: :get %></p>
 
  
 </div>

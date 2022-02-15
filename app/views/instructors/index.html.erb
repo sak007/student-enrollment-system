@@ -5,27 +5,23 @@
 <div id="instructors">
   <% @instructors.each do |instructor| %>
     <%= render instructor %>
-    <p>
     <%   if session[:role]=="ADMIN"%>
-    <%= button_to "Destroy this instructor", instructor, method: :delete %>
-    <%= link_to "Show this instructor", instructor %>
+      <p><%= button_to "Destroy this instructor", instructor, method: :delete %></p>
+      <p><%= button_to "Show this instructor", instructor, method: :get %></p>
     <% else %>
-    <%= link_to "Show this instructor", instructor %>
+      <p><%= button_to "Show this instructor", instructor, method: :get %></p>
 
 
     <% end %>
-    </p>
   <% end %>
 </div>
 
 
 <%   if session[:role]=="ADMIN"%>
-<p>
-<%= link_to "Create A Instructor", new_instructor_path(:admin=>"admin") %>
-</p>
+<p> <%= button_to "Create A Instructor", new_instructor_path(:admin=>"admin"), method: :get %> </p>
 <%elsif session[:role]!="INSTRUCTOR"%>
 
 
-<%= link_to "New Instructor", new_instructor_path %>
+<p><%= button_to "New Instructor", new_instructor_path, method: :get %></p>
 
 <% end %>
