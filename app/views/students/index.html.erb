@@ -3,39 +3,48 @@
 <h1>Students</h1>
 
 <div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-    <%   if session[:role]=="ADMIN"%>
-    <%= button_to "Destroy this student", student, method: :delete %>
-    <%= link_to "Show this student", student %>
-    <% else %>
-    <%= link_to "Show this student", student %>
+  <table>
+    <thead>
+    <tr>
+      <th>Student Name</th>
+      <th>DOB</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Major</th>
+    </tr>
+    </thead>
 
-
+    <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.dob %></td>
+        <td><%= student.user_email %></td>
+        <td><%= student.phone %></td>
+        <td><%= student.major %></td>
+        <td><%= button_to 'Show', student, method: :get %></td>
+        <% if session[:role] == 'ADMIN' and !params[:course_id]%>
+          <td><%= button_to 'Delete Account', student, method: :delete %></td>
+        <% end %>
+        <% if session[:role] == 'ADMIN' or session[:role] == 'INSTRUCTOR' %>
+          <%if params[:course_id] %>
+            <% if params[:status] == 'ENROLLED' or params[:status] == 'WAITLIST' %>
+              <td><%= button_to 'Drop', Enrollment.find_by(course_id: params[:course_id], student_id: student.id), method: :delete, params: { :course_id => params[:course_id] }  %></td>
+            <% elsif params[:status] == 'NOTENROLLED'%>
+              <td><%= button_to 'Enroll', new_enrollment_path, method: :get, params: { :course_id => params[:course_id], student_id: student.id} %></td>
+            <% end %>
+          <% end%>
+        <% end %>
+      </tr>
     <% end %>
-    </p>
- 
+    </tbody>
+  </table>
+
 </div>
 
-<%   if session[:role]=="ADMIN"%>
-<p>
-<%= link_to "Create A Student", new_student_path(:admin=>"admin") %>
-</p>
-<%elsif session[:role]!="INSTRUCTOR"%>
 
-
-<%= link_to "New student", new_student_path %>
-<%elsif session[:role]=="INSTRUCTOR"%>
-
-<%if params[:course_id] %>
-<h1>
-
-<td><%= button_to 'Remove this Student', Enrollment.find_by(course_id: params[:course_id], student_id: student.id), method: :delete, params: { :course_id => params[:course_id] }  %></td>
-</h1>
-<% end%>
-<% end %>
-<%if session[:role]=="INSTRUCTOR"%>
-<%= button_to "Back  to instructors", instructor_path(session[:id])%>
-<%end %>
+<% if session[:role] == "ADMIN"%>
+  <p>
+    <%= button_to "Create A Student", new_student_path(:admin=>"admin"), method: :get %>
+  </p>
 <% end %>

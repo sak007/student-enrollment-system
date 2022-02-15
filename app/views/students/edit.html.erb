@@ -5,7 +5,7 @@
 <br>
 
 <div>
- 
-  <%= link_to "Back to students", request.referer.present? ? request.referer : students_path %>
+
+  <p><%= button_to "Back to students", request.referer.present? ? request.referer : students_path, method: :get %></p>
 
 </div>

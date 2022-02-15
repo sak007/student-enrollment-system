@@ -5,12 +5,20 @@ class StudentsController < ApplicationController
   before_action :can_edit, only: [:edit, :update, :destroy]
   # GET /students or /students.json
   def index
-    if session[:role] == 'ADMIN'
-      @students = Student.all
+    if session[:role] == 'ADMIN' or session[:role] == 'INSTRUCTOR'
+      if params[:status]
+        if params[:status] == 'WAITLIST'
+          @students = Student.where(id: Enrollment.where(course_id: params[:course_id], status: 'WAITLIST').pluck(:student_id))
+        elsif params[:status] == 'ENROLLED'
+          @students = Student.where(id: Enrollment.where(course_id: params[:course_id], status: 'ENROLLED').pluck(:student_id))
+        else
+          @students = Student.where.not(id: Enrollment.where(course_id: params[:course_id]).pluck(:student_id))
+        end
+      else
+        @students = Student.all
+      end
     elsif session[:role] == 'STUDENT'
       @students = [Student.find(session[:id])]
-    elsif session[:role] == 'INSTRUCTOR'
-      @students = Student.where(id: Enrollment.where(course_id: Course.where(instructor_id: session[:id]).pluck(:id)).pluck(:student_id))
     end
   end
 
@@ -32,19 +40,7 @@ class StudentsController < ApplicationController
   def edit
    
   end
-  # GET/showAllStundets
-  def showAllStudents
-    if params[:status]="waitlist" and session[:role] == 'INSTRUCTOR'
-      @allStudents = Student.where(id: Enrollment.where("course_id=? AND status=?", params[:course_id], "WAITLIST").pluck(:student_id))
 
-    
-    elsif session[:role] == 'INSTRUCTOR'
-      @allStudents = Student.where.not(id: Enrollment.where(course_id: params[:course_id]).pluck(:student_id))
-    else
-      redirect_to root_path
-    end
-  
-  end
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)

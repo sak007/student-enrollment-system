@@ -19,14 +19,16 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-   
-
     if params[:course_id]
       course = Course.find(params[:course_id])
+      if session[:role] == 'ADMIN' or session[:role] == 'INSTRUCTOR'
+        student_id = params[:student_id]
+      else
+        student_id = session[:id]
+      end
       if course.status == "CLOSED"
         redirect_to courses_path
       else
-        student_id = session[:role] == "INSTRUCTOR" ? params[:student_id]: session[:id]
         @enrollment.student_id = student_id
         @enrollment.course_id = course.id
         if course.status == 'OPEN'
