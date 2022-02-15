@@ -36,7 +36,11 @@
           <td><%= course.name %></td>
           <td><%= course.description %></td>
           <td><%= course.instructor.name %></td>
-          <td><%= course.weekday1 + "/" + course.weekday2%></td>
+          <% weekday =  course.weekday1%>
+          <% if course.weekday2 %>
+            <% weekday += "/" + course.weekday2 %>
+          <% end %>
+          <td><%= weekday %></td>
           <td><%= course.starttime %></td>
           <td><%= course.endtime %></td>
           <td><%= course.room %></td>
@@ -101,7 +105,11 @@
         <td><%= course.name %></td>
         <td><%= course.description %></td>
         <td><%= course.instructor.name %></td>
-        <td><%= course.weekday1 + "/" + course.weekday2%></td>
+        <% weekday =  course.weekday1%>
+        <% if course.weekday2 %>
+          <% weekday += "/" + course.weekday2 %>
+        <% end %>
+        <td><%= weekday %></td>
         <td><%= course.starttime %></td>
         <td><%= course.endtime %></td>
         <td><%= course.room %></td>
