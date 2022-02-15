@@ -2,5 +2,6 @@
 
 <h1>Admins</h1>
 
+<p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
 
 
