@@ -34,14 +34,15 @@
     </div>
   <% end %>
 
+  <% weekdays = [['MON','MON'],['TUE','TUE'], ['WED','WED'], ['THU','THU'], ['FRI','FRI']] %>
   <div class="field">
     <%= form.label :weekday1 %>
-    <%= form.text_field :weekday1, :id => 'weekday1' %>
+    <%= form.select :weekday1, weekdays, include_blank: false %>
   </div>
 
   <div class="field">
     <%= form.label :weekday2 %>
-    <%= form.text_field :weekday2, :id => 'weekday2' %>
+    <%= form.select :weekday2, weekdays, include_blank: true %>
   </div>
 
   <div class="field">
