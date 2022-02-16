@@ -7,9 +7,11 @@
 | - | - | - |
 | 1 | Deployment Information | [Click here](#deployment-information) |
 | 2 | Credentials | [Click here](#credentials) |
-| 3 | Installation Instructions | [Click here](#installation-instructions) |
-| 4 | Deployment Instructions | [Click here](#deployment-instructions) |
-| 5 | Team Members | [Click here](#team-members) |
+| 3 | Documentation | [Click here](#documentation) |
+| 4 | Edge Case Scenarios | [Click here](#edge-case-scenarios) |
+| 5 | Installation Instructions | [Click here](#installation-instructions) |
+| 6 | Deployment Instructions | [Click here](#deployment-instructions) |
+| 7 | Team Members | [Click here](#team-members) |
 
 
 ## Deployment Information
@@ -37,6 +39,73 @@ Login using any of the following credentials.
 | 10. | Student | garry@ses.com | student |
 | 11. | Student | ann@ses.com | student |
 | 12. | Student | craig@ses.com | student |
+
+
+## Documentation
+
+### Admin Workflow
+
+  - Edit your details
+    + Click on 'Edit Details' button.
+    + Make changes and click on 'Save' button.
+  - Students
+    + Click on 'Show All Students' button from home page to view all Students.
+      * Click on show to view student's information.
+      * Click on delete account to delete student's acccount.
+      * Click on Create A Student button to create a new Student account.
+  - Instructors 
+    + Click on 'Show All Instructors' button from home page to view all Instructors.
+      * Click on show to view instructor's information.
+      * Click on delete account to delete instructor's acccount.
+      * Click on Create A Instructor button to create a new instructor account.
+  - Courses
+    + Click on 'Show All Courses' button from home page to view all Courses.
+      * Click on Show to view course details.
+      * Click on Show and then click on respective option to update/delete the course.
+      * Click on Enrolled Students to view all students enrolled in the course. You can drop a student from the course from here.
+      * Click on Waitlisted Students to view all students waitlisted in the course. You can drop a student from the course from here.
+      * Click on Enroll Student to enroll a student in the course and select the student to enroll. (**Not available when course is closed**).
+      * Click on Create Course to create a new course.
+
+### Instructor Workflow
+  - Edit your details
+    + Click on 'Edit Details' button.
+    + Make changes and click on 'Update Instructor' button.
+  - Delete Account
+    + Click on 'Delete Account' button from home page.
+  - Courses
+    + Click on Show Courses to view all courses.
+      * Click on Show to view course details.
+      * Click on Show and then click on respective option to update/delete the course.
+      * Click on Enrolled Students to view all students enrolled in the course. You can drop a student from the course from here.
+      * Click on Waitlisted Students to view all students waitlisted in the course. You can drop a student from the course from here.
+      * Click on Enroll Student to enroll a student in the course and select the student to enroll. (**Not available when course is closed**).
+      * Click on Create Course to create a new course.
+
+### Student Workflow
+  - Edit your details
+    + Click on 'Edit Details' button.
+    + Make changes and click on 'Update Student' button.
+  - Delete Account
+    + Click on 'Delete Account' button from home page.
+  - Courses
+    + Click on 'Courses' to list all courses. 
+      * Courses in the top are the courses you are not enrolled to. 
+      * Courses in the bottom are enrolled courses.
+      * Click on Show to view course details.
+      * Click on Enroll to enroll to a course. Based on the Availability, you will be enrolled or waitlisted.
+      * Click on Drop to drop from a course.
+    
+## Edge Case Scenarios
+  - Course is deleted
+    + All the enrollments for this course will be removed.
+  - Student is deleted
+    + All the enrollments for the student will be removed.
+    + If this student is enrolled in a course, the first student in the waitlist will be enrolled to this course.
+  - Instructor is deleted
+    + All instructor's courses will be removed.
+    + All the enrollments for these courses will be removed.
+  
 
 ## Installation Instructions
 
@@ -86,4 +155,5 @@ The application can be accessed from localhost:3000
   - Ashok Kumar Selvam - aselvam
   - Rachana Kondabala - rkondab
   - Vishal Veera Reddy - vveerar2
+
 

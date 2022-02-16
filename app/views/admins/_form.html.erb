@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name , :readonly => true%>
+    <%= form.text_field :name%>
   </div>
 
   <div>
@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :phone, style: "display: block" %>
-    <%= form.number_field :phone, :readonly => true %>
+    <%= form.number_field :phone %>
   </div>
 
   <div>
@@ -36,5 +36,8 @@
     <%= form.password_field :password_confirmation, :readonly => true %>
   </div>
 
+  <div class="actions">
+    <%= form.submit "Save" %>
+  </div>
  
 <% end %>
