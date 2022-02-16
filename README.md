@@ -8,6 +8,7 @@
 | 1 | Deployment Information | [Click here](#deployment-information) |
 | 2 | Credentials | [Click here](#credentials) |
 | 3 | Documentation | [Click here](#documentation) |
+| 3 | Edge Case Scenarios | [Click here](#edge-case-scenarios) |
 | 4 | Installation Instructions | [Click here](#installation-instructions) |
 | 5 | Deployment Instructions | [Click here](#deployment-instructions) |
 | 6 | Team Members | [Click here](#team-members) |
