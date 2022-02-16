@@ -19,11 +19,13 @@
 - URL: https://fierce-mesa-20166.herokuapp.com/
 - Admin credentials - admin@ses.com/admin
 
+[Secondary environment URL: https://quiet-depths-26932.herokuapp.com/ (**NOTE: Data in this environment will be reset daily at 7PM EST. Only the seeded data will be available.**)]
+
 ## Credentials
 
 Apart from the admin, the environment contains the following user data seeded to ease the testing process.
 Login using any of the following credentials.
-- **Note: Since users can delete their account, it is not guaranteed that all these accounts will be available at all the time. We will reset the data regularly to make sure these accounts are available.**
+- **Note: Since users can delete their account, it is not guaranteed that all these accounts will be available at all the time. We will reset the data regularly in secondary environment to make sure these accounts are available.**
 
 | S.No | Role | User Email | Password | 
 |-|-|-|-|
