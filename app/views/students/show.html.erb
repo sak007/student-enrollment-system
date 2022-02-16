@@ -4,7 +4,7 @@
 
 <div>
   <% if session[:role] == 'STUDENT' %>
-    <p><%= button_to "List Available Courses", courses_path, method: :get %> </p>
+    <p><%= button_to "Courses", courses_path, method: :get %> </p>
   <% end %>
 
   <p><%= button_to "Edit details", edit_student_path(@student), method: :get %></p>
@@ -12,6 +12,7 @@
   <% if session[:role] == 'STUDENT' or session[:role] == 'ADMIN' %>
     <p><%= button_to 'Delete Account', @student, method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
-  <p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
-
+  <% if session[:role] != 'STUDENT' %>
+    <p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
+  <% end %>
 </div>
