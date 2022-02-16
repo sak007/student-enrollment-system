@@ -30,7 +30,7 @@ class InstructorsController < ApplicationController
 
     respond_to do |format|
       if @instructor.save
-        
+
         @user = User.new
         @user.email = @instructor.user_email
         @user.password_digest = @instructor.password_digest
@@ -38,7 +38,7 @@ class InstructorsController < ApplicationController
         @user.save
         if session[:admin]
           format.html{redirect_to admin_path(session[:adminId]), notice: "Instructor was successfully created." }
-         
+
          else
         format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully created." }
         format.json { render :show, status: :created, location: @instructor }
@@ -61,7 +61,7 @@ class InstructorsController < ApplicationController
           format.html { redirect_to instructor_url(@instructor), notice: "Instructor was successfully updated." }
         format.json { render :show, status: :ok, location: @instructor }
         end
-        
+
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @instructor.errors, status: :unprocessable_entity }
