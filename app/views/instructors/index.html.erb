@@ -3,26 +3,36 @@
 <h1>Instructors</h1>
 
 <div id="instructors">
-  <% @instructors.each do |instructor| %>
-    <%= render instructor %>
-    <%   if session[:role]=="ADMIN"%>
-      <p><%= button_to "Destroy this instructor", instructor, method: :delete %></p>
-      <p><%= button_to "Show this instructor", instructor, method: :get %></p>
-    <% else %>
-      <p><%= button_to "Show this instructor", instructor, method: :get %></p>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+    </tr>
+    </thead>
 
-
+    <tbody>
+    <% @instructors.each do |instructor| %>
+      <tr>
+        <td><%= instructor.name %></td>
+        <td><%= instructor.user_email %></td>
+        <td><%= instructor.department %></td>
+        <% if session[:role]=="ADMIN"%>
+          <td><%= button_to "Delete Account", instructor, method: :delete %></td>
+          <td><%= button_to "Show", instructor, method: :get %></td>
+        <% else %>
+          <td><%= button_to "Show", instructor, method: :get %></td>
+        <% end %>
+      </tr>
     <% end %>
-  <% end %>
+    </tbody>
+  </table>
 </div>
 
 
 <%   if session[:role]=="ADMIN"%>
 <p> <%= button_to "Create A Instructor", new_instructor_path(:admin=>"admin"), method: :get %> </p>
-<%elsif session[:role]!="INSTRUCTOR"%>
-
-
-<p><%= button_to "New Instructor", new_instructor_path, method: :get %></p>
 
 <% end %>
 <p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
