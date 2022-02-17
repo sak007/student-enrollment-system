@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :enrollments
+  resources :enrollments, except: [:edit, :update]
   resources :courses
   resources :students
   resources :instructors

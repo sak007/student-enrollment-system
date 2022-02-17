@@ -1,5 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
+<% if session[:role] != 'STUDENT' %>
+  <h1>Student Details</h1>
+<% end %>
+
 <%= render @student %>
 
 <div>
@@ -13,6 +17,6 @@
     <p><%= button_to 'Delete Account', @student, method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
   <% if session[:role] != 'STUDENT' %>
-    <p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
+<!--    <p><%#= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>-->
   <% end %>
 </div>

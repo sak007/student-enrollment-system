@@ -1,5 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
+<% if session[:role] != 'INSTRUCTOR' %>
+  <h1>Instructor Details</h1>
+<% end %>
+
 <%= render @instructor %>
 
 <div>

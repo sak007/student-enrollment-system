@@ -9,6 +9,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Department</th>
+      <th colspan="4"></th>
     </tr>
     </thead>
 
@@ -35,4 +36,4 @@
 <p> <%= button_to "Create A Instructor", new_instructor_path(:admin=>"admin"), method: :get %> </p>
 
 <% end %>
-<p><%= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>
+<!--<p><%#= button_to "Back", request.referer.present? ? request.referer : admin_path, method: :get %></p>-->
