@@ -72,7 +72,7 @@ class InstructorsController < ApplicationController
   # DELETE /instructors/1 or /instructors/1.json
   def destroy
     @instructor.destroy
-    @user.destory
+    @user.destroy
     respond_to do |format|
       if session[:admin]
         format.html { redirect_to instructors_path, notice: "Instructor was successfully destroyed." }
