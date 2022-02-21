@@ -8,7 +8,7 @@ class Course < ApplicationRecord
     validates :weekday2,comparison: {other_than: :weekday1 }, inclusion: { in: ['', 'MON', 'TUE', 'WED', 'THU', 'FRI'] }, allow_blank: true
     validates :starttime, presence: true, format: { with: /(^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$)/, message: "Please Enter a valid time in HH:SS format"}
     validates :endtime, presence: true, format: { with: /(^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$)/, message: "Please Enter a valid time in HH:SS format"}
-    validates :code, presence: true, uniqueness: true, format: { with: /(^[A-Z]{3}[0-9]{3}$)/, message: "Please Enter a valid code" }
+    validates :code, presence: true, uniqueness: true, format: { with: /(^[A-Z]{3}[0-9]{3}$)/, message: "Please Enter a valid code(3 chars in caps + 3 numbers eg. CSC101)" }
     validates :capacity, presence: true
     validates :wlcapacity, presence: true
     validates :room, presence: true
@@ -16,16 +16,16 @@ class Course < ApplicationRecord
     validate :validate_time
 
     def validate_time
-        res = true
-        if (starttime[0] + starttime[1]) > (endtime[0] + endtime[1])
-            res = false
-        elsif (starttime[0] + starttime[1]) == (endtime[0] + endtime[1])
-            if (starttime[3] + starttime[4]) > (endtime[3] + endtime[4])
-                res = false
-            end
-        end
-        if !res
-            errors.add(:endtime, "can't be greater than start time")
+        s = starttime.split(':')
+        e = endtime.split(':')
+        x1 = s[0].to_i
+        x2 = s[1].to_i
+        y1 = e[0].to_i
+        y2 = e[1].to_i
+        x = x1 * 60 + x2
+        y = y1 * 60 + y2
+        if y <= x
+            errors.add(:endtime, "can't be less than or equal to start time")
         end
     end
 end
