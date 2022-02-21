@@ -5,7 +5,7 @@
 <br>
 
 <div>
-
-  <p><%= button_to "Back to Instructors", request.referer.present? ? request.referer : showAllInstructors_path, method: :get %></p>
-
+  <% if session[:role] == 'ADMIN' %>
+    <p><%= button_to "Back to Instructors", request.referer.present? ? request.referer : showAllInstructors_path, method: :get %></p>
+  <% end %>
 </div>
