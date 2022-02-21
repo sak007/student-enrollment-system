@@ -1,29 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
+  id: 1
+  name: 'Course 1'
+  description: 'Course 1'
   instructor_id: 1
-  weekday1: MyString
-  weekday2: MyString
-  starttime: MyString
-  endtime: MyString
-  code: MyString
+  weekday1: 'MON'
+  weekday2: 'TUE'
+  starttime: '11:30'
+  endtime: '12:30'
+  code: 'CSC123'
   capacity: 1
   wlcapacity: 1
-  status: MyString
-  room: MyString
+  status: 'CLOSED'
+  room: 'R101'
 
 two:
-  name: MyString
-  description: MyString
+  id: 2
+  name: 'Course 2'
+  description: 'Course 2'
   instructor_id: 1
-  weekday1: MyString
-  weekday2: MyString
-  starttime: MyString
-  endtime: MyString
-  code: MyString
+  weekday1: 'MON'
+  weekday2: 'TUE'
+  starttime: '11:30'
+  endtime: '12:30'
+  code: 'CSC124'
   capacity: 1
   wlcapacity: 1
-  status: MyString
-  room: MyString
+  status: 'OPEN'
+  room: 'R103'

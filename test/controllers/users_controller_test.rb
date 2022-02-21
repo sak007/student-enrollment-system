@@ -3,46 +3,48 @@ require "test_helper"
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
+    loginAsAdmin
   end
 
-  test "should get index" do
-    get users_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_user_url
-    assert_response :success
-  end
-
-  test "should create user" do
-    assert_difference("User.count") do
-      post users_url, params: { user: { email: @user.email, password: "secret", password_confirmation: "secret", role: @user.role } }
+  test "should not get index" do
+    assert_raise(Exception) do
+      get users_url
     end
-
-    assert_redirected_to user_url(User.last)
   end
 
-  test "should show user" do
-    get user_url(@user)
-    assert_response :success
+  test "should not get new" do
+    assert_raise(Exception) do
+      get new_user_url
+    end
   end
 
-  test "should get edit" do
-    get edit_user_url(@user)
-    assert_response :success
+  test "should not create user" do
+    assert_raise(Exception) do
+      post users_url, params: { user: { email: 'x@x.com', password: "secret", password_confirmation: "secret", role: @user.role } }
+    end
   end
 
-  test "should update user" do
-    patch user_url(@user), params: { user: { email: @user.email, password: "secret", password_confirmation: "secret", role: @user.role } }
-    assert_redirected_to user_url(@user)
+  test "should not show user" do
+    assert_raise(Exception) do
+      get user_url(@user)
+    end
   end
 
-  test "should destroy user" do
-    assert_difference("User.count", -1) do
+  test "should not get edit" do
+    assert_raise(Exception) do
+      get edit_user_url(@user)
+    end
+  end
+
+  test "should not update user" do
+    assert_raise(Exception) do
+      patch user_url(@user), params: { user: { email: @user.email, password: "secret", password_confirmation: "secret", role: @user.role } }
+    end
+  end
+
+  test "should not destroy user" do
+    assert_raise(Exception) do
       delete user_url(@user)
     end
-
-    assert_redirected_to users_url
   end
 end

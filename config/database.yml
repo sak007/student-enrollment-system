@@ -47,7 +47,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: ses_app
+  database: ses_app_test
   pool: 5
   username: ses_user
   password:

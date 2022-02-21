@@ -3,6 +3,7 @@ require "test_helper"
 class StudentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @student = students(:one)
+    loginAsAdmin
   end
 
   test "should get index" do
@@ -17,7 +18,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create student" do
     assert_difference("Student.count") do
-      post students_url, params: { student: { dob: @student.dob, major: @student.major, name: @student.name, password: "secret", password_confirmation: "secret", phone: @student.phone, user_email: @student.user_email } }
+      post students_url, params: { student: { dob: @student.dob, major: @student.major, name: @student.name, password: "secret", password_confirmation: "secret", phone: @student.phone, user_email: 'studenttest@s.com' } }
     end
 
     assert_redirected_to student_url(Student.last)

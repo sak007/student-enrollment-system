@@ -10,4 +10,19 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def loginAsAdmin
+    @admin = admins(:one)
+    post sessions_path, params: { user_email: @admin.user_email, password: 'secret' }
+  end
+
+  def loginAsInstructor
+    @instructor = instructors(:one)
+    post sessions_path, params: { user_email: @instructor.user_email, password: 'secret' }
+  end
+
+  def loginAsStudent
+    @student = students(:one)
+    post sessions_path, params: { user_email: @student.user_email, password: 'secret' }
+  end
+
 end

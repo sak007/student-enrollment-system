@@ -1,18 +1,21 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  test "should get new" do
-    get sessions_new_url
-    assert_response :success
+  test "should not get new" do
+    assert_raise(Exception) do
+      get sessions_new_url
+    end
   end
 
-  test "should get create" do
-    get sessions_create_url
-    assert_response :success
+  test "should not get create" do
+    assert_raise(Exception) do
+      get sessions_create_url
+    end
   end
 
-  test "should get destroy" do
-    get sessions_destroy_url
-    assert_response :success
+  test "should not get destroy" do
+    assert_raise(Exception) do
+      get sessions_destroy_url
+    end
   end
 end
